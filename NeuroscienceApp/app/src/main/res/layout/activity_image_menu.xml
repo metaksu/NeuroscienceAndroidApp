@@ -105,14 +105,14 @@
             android:orientation="vertical">
 
             <ImageButton
+                android:id="@+id/bt_gallery"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:scaleType="fitXY"
-                android:id="@+id/bt_gallery"
                 android:layout_centerHorizontal="true"
-                android:alpha="0.3"
-                android:src="@drawable/gallery_icon"
-                android:background="@android:color/transparent"/>
+                android:alpha="1.0"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/gallery_icon" />
 
             <TextView
                 android:layout_width="70dp"
@@ -132,16 +132,16 @@
             android:orientation="vertical">
 
             <ImageButton
+                android:id="@+id/bt_choose"
                 android:layout_width="60dp"
                 android:layout_height="50dp"
-                android:scaleType="fitXY"
-                android:text="@string/option_choose"
-                android:id="@+id/bt_choose"
-                android:alpha="0.3"
                 android:layout_below="@+id/bt_examples"
                 android:layout_centerHorizontal="true"
+                android:alpha="1.0"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
                 android:src="@drawable/camera_icon"
-                android:background="@android:color/transparent"/>
+                android:text="@string/option_choose" />
 
 
             <TextView

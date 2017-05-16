@@ -1,13 +1,17 @@
 package luc.edu.neuroscienceapp.activities;
 
+import android.content.pm.PackageManager;
+import android.support.v4.app.ActivityCompat;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.Manifest;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
@@ -41,6 +45,14 @@ public class ImageMenuActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
+            }
+            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
+            }
+        }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_menu);
 
@@ -64,9 +76,9 @@ public class ImageMenuActivity extends AppCompatActivity {
                 /*
                     Try new approach using a camera class implementation
                  */
-//                Intent cameraIntent = new Intent(ImageMenuActivity.this, CameraActivity.class);
-//                startActivityForResult(cameraIntent, CAMERA_REQUEST);
-//                imageSelected = true;
+                Intent cameraIntent = new Intent(ImageMenuActivity.this, CameraActivity.class);
+                startActivityForResult(cameraIntent, CAMERA_REQUEST);
+                imageSelected = true;
 
 
             }

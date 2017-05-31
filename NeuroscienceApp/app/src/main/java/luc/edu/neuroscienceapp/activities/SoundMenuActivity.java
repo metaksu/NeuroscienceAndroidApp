@@ -1,6 +1,12 @@
 package luc.edu.neuroscienceapp.activities;
 
+import android.Manifest;
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
+import android.os.Build;
+import android.provider.MediaStore;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -19,17 +25,23 @@ public class SoundMenuActivity extends AppCompatActivity {
 
     ImageButton btExamples, btChoose, btGallery;
     FileManager fileManager = new FileManager();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sound_menu);
 
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            if (checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.RECORD_AUDIO}, 1);
+            }
+        }
         ActionBar toolbar = getSupportActionBar();
         if(toolbar != null) {
             toolbar.setDisplayHomeAsUpEnabled(true);
         }
 
-        btExamples = (ImageButton) findViewById(R.id.bt_examples);
+        btExamples = (ImageButton) findViewById(R.id.bt_record);
         btChoose = (ImageButton) findViewById(R.id.bt_choose);
         btGallery = (ImageButton) findViewById(R.id.bt_gallery);
 
@@ -39,6 +51,25 @@ public class SoundMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intentGallery = new Intent(SoundMenuActivity.this, SoundExamplesActivity.class);
                 startActivity(intentGallery);
+            }
+        });
+
+        btChoose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intentRecorder = new Intent(SoundMenuActivity.this, SoundRecordingActivity.class);
+                startActivity(intentRecorder);
+            }
+        });
+
+        btGallery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent audioIntent = new Intent(Intent.ACTION_PICK,
+                        MediaStore.Audio.Media.EXTERNAL_CONTENT_URI);
+                //audioIntent.setType("audio/*");
+                startActivityForResult(audioIntent, 1);
+                Uri uri = audioIntent.getData();
             }
         });
     }

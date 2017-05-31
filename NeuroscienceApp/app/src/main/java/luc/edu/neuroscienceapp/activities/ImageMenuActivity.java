@@ -49,9 +49,6 @@ public class ImageMenuActivity extends AppCompatActivity {
             if (checkSelfPermission(Manifest.permission.CAMERA) != PackageManager.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.CAMERA}, 1);
             }
-            if (checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 1);
-            }
         }
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_menu);
@@ -61,7 +58,7 @@ public class ImageMenuActivity extends AppCompatActivity {
             toolbar.setDisplayHomeAsUpEnabled(true);
         }
 
-        btExamples = (ImageButton) findViewById(R.id.bt_examples);
+        btExamples = (ImageButton) findViewById(R.id.bt_record);
         btChoose = (ImageButton) findViewById(R.id.bt_choose);
         btGallery = (ImageButton) findViewById(R.id.bt_gallery);
 

@@ -1,10 +1,12 @@
 package luc.edu.neuroscienceapp.imageprocessing;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
+import android.support.v7.preference.PreferenceManager;
 import android.util.Log;
 
 import org.ejml.data.DenseMatrix64F;
@@ -163,10 +165,10 @@ public class ImageProcessing {
 
 
     public static Bitmap[] process(Bitmap bmp) throws Exception {
-        return process(bmp, 500, 20);
+        return process(bmp, 500, 20, null);
     }
 
-    public static Bitmap[] process(Bitmap bmp, int numPatches, int numIca) throws Exception {
+    public static Bitmap[] process(Bitmap bmp, int numPatches, int numIca, Context con) throws Exception {
 
         double[][] image = bmpToMatrix(bmp);
 
@@ -174,7 +176,7 @@ public class ImageProcessing {
         int imageCols = image[0].length;
 
         // Collecting random patches
-        int patchSize = 8;
+        int patchSize = 6;
         int numMaxPossiblePatches = (imageCols-patchSize)*(imageRows-patchSize);
         int numMaxPatches = (numPatches <= numMaxPossiblePatches) ? numPatches : numMaxPossiblePatches;
         int numTries = numPatches*2;
@@ -220,7 +222,9 @@ public class ImageProcessing {
         double[][] icaMatrix = Matrix.mult(ica.getK(), ica.getW());
 
         // Choice between PCA and ICA
-        icaMatrix = pcaMatrix.clone();
+        boolean bIca = PreferenceManager.getDefaultSharedPreferences(con).getBoolean("luc.edu.neuroscienceapp.ica",false);
+        if (!bIca)
+            icaMatrix = pcaMatrix.clone();
 
         // The columns of icaMatrix are the independent components
         // Here we convert them to 8x8 Bitmap windows

@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceActivity;
 import android.preference.PreferenceFragment;
+import android.preference.SwitchPreference;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.preference.Preference;
@@ -85,6 +86,20 @@ public class SettingsActivity extends AppCompatActivity {
                     return false;
                 }
             });
+
+            SwitchPreference spref = new SwitchPreference(getActivity());
+            spref.setTitle("Enable ICA");
+            spref.setKey("luc.edu.neuroscienceapp.ica");
+            getPreferenceScreen().addPreference(spref);
+            /*
+            spref.setOnPreferenceChangeListener(new android.preference.Preference.OnPreferenceChangeListener() {
+                @Override
+                public boolean onPreferenceChange(android.preference.Preference preference, Object newValue) {
+                    PreferenceManager.getDefaultSharedPreferences(getActivity()).edit().putBoolean("luc.edu.neuroscienceapp.ica", (boolean)newValue);
+                    Toast.makeText(getActivity(), "ENABLE ICA: " + (boolean) newValue, Toast.LENGTH_SHORT).show();
+                    return false;
+                }
+            });*/
         }
 
         @Override

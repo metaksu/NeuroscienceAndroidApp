@@ -79,14 +79,14 @@
 
 
             <ImageButton
+                android:id="@+id/bt_record"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:scaleType="fitXY"
-                android:id="@+id/bt_examples"
                 android:layout_centerHorizontal="true"
                 android:alpha="0.8"
-                android:src="@drawable/selector_examples"
-                android:background="@android:color/transparent"/>
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/selector_examples" />
 
             <TextView
                 android:layout_width="70dp"
@@ -107,14 +107,14 @@
             android:orientation="vertical">
 
             <ImageButton
+                android:id="@+id/bt_gallery"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:scaleType="fitXY"
-                android:id="@+id/bt_gallery"
                 android:layout_centerHorizontal="true"
-                android:alpha="0.3"
-                android:src="@drawable/choose_sound"
-                android:background="@android:color/transparent"/>
+                android:alpha="1"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:src="@drawable/choose_sound" />
 
             <TextView
                 android:layout_width="70dp"
@@ -135,16 +135,16 @@
 
             <ImageButton
 
+                android:id="@+id/bt_choose"
                 android:layout_width="50dp"
                 android:layout_height="50dp"
-                android:scaleType="fitXY"
-                android:text="@string/option_choose_sound"
-                android:id="@+id/bt_choose"
-                android:alpha="0.3"
-                android:layout_below="@+id/bt_examples"
+                android:layout_below="@+id/bt_record"
                 android:layout_centerHorizontal="true"
+                android:alpha="1"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
                 android:src="@drawable/play_button"
-                android:background="@android:color/transparent"/>
+                android:text="@string/option_choose_sound" />
 
 
             <TextView

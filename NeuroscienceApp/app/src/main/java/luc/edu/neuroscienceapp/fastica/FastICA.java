@@ -135,7 +135,7 @@ public class FastICA {
 	 * simple default values.
 	 */
 	public FastICA() {
-		this(new LogCosh(), 1E-5, 200, true);
+		this(new LogCosh(), 1E-7, 2000, true);
 	}
 	
 	/**
